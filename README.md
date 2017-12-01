@@ -3,7 +3,7 @@ Create multilingual sites in NodeJS with inline localisations.
 
 ## What is it good for?
 
-You may want to have an express based website that speak two or three languages fluently. Sometime using the internalization packages is just an overkill.
+You may want to have an express based website that speaks two or three languages fluently. Sometime using the internalization packages is just an overkill.
 With this package you can define your transtaltions inline, and use them seemlessly. It's a kind of magick. ...
 
 ### Prerequisites
@@ -18,7 +18,7 @@ npm install site-language --save
 Another approach, in case you want to customize this script, let's say you want to put it into your app folder that contains your custom scripts.
 
 ```bash
-curl https://raw.githubusercontent.com/LaKing/site-language/master/index.js > language.js
+curl https://raw.githubusercontent.com/LaKing/site-language/master/index.js > app/language.js
 
 ```
 
@@ -28,11 +28,7 @@ Once installed, tell your express app to use it.
 
 ```javascript
 require('site-language')(app);
-```
-
-
-Or, if you have the script in your app folder
-```javascript
+// or if you got the code in your app fodler
 require('./app/language.js')(app);
 ```
 
@@ -50,7 +46,7 @@ app.get('/', function(req, res, next) {
 
 ```
 
-Changeing languges will be enabled by visiting the language code as uri
+Changeing languges will be enabled by visiting the language code as uri - this will set the session.lang variable, and redirect to the site root..
 ```
     https://example.com/en
     https://example.com/hu
