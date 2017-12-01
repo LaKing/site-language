@@ -59,7 +59,8 @@ I assume you have all your public-html files in the public folder of the project
 ## Usage
 
 Once the thing is up and running, you can start to create your multilingual strings.
-Let's say have a bold html text in your main.html file:
+You can do this in jour HTML, JS, JSON files, everywhere! (I suggest, to put the tags inside the strings) 
+Let's say have a bold HTML text in your main.html file:
 
 ```html
 <b>Something as a language test.</b>
@@ -80,8 +81,6 @@ language.transpile(app)
 // setting this will call transpile on every / request
 app.locals.settings.debug = true
 ```
-You can do this in jour JS, JSON files, everywhere! (I suggest, to put the tags inside the strings) 
-
 ## How it works
 
 When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the ## separator, and if the chunk starts with a @ character, then it is assumed that it is some text subject to localisation.
