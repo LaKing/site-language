@@ -77,11 +77,20 @@ Now edit that line, and add the markup.
 
 ```
 That's it. Save it, and restart your project.
+Or - if you want, you can speed up developemnt by
+```javascript
+// calling this on certain requests
+language.transpile(app)
+
+// setting this will call transpile on every / request
+app.locals.settings.debug = true
+```
+You can do this in jour JS, JSON files, everywhere! (I suggest, to put the tags inside the strings) 
 
 ## How it works
 
-When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the '##' separator, and if the chunk starts with a '@' character, then it assumed that this is some text subject to localisation.
-For a certain language code, the text is kept, all others all dropped. Simple. Once these files are rendered, they are saved in a /tmp folder and if the file is requested an express route is choosing a language based on req.session.lang, and serves the translated file.
+When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the '##' separator, and if the chunk starts with a '@' character, then it is assumed that it is some text subject to localisation.
+For the given language code, the text is kept, all others all dropped. Simple. Once these files are rendered, they are saved in a /tmp folder and if the file is requested an express route is choosing a language based on req.session.lang, and serves the translated file.
 
 ## Do I need to define my languages and my default language?
 
