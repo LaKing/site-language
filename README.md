@@ -12,12 +12,12 @@ This project requires express-session already set up and functional with a prope
 
 Your best bet to install this package into your project would be:
 
-```
+```bash
 npm install site-language --save
 ```
 Another approach, in case you want to customize this script, let's say you want to put it into your app folder that contains your custom scripts.
 
-```
+```bash
 curl https://raw.githubusercontent.com/LaKing/site-language/master/index.js > language.js
 
 ```
@@ -26,20 +26,20 @@ curl https://raw.githubusercontent.com/LaKing/site-language/master/index.js > la
 
 Once installed, tell your express app to use it.
 
-```
+```javascript
 require('site-language')(app);
 ```
 
 
 Or, if you have the script in your app folder
-```
+```javascript
 require('./app/language.js')(app);
 ```
 
 
 And eventually, in case you use ejs, and want your index.html to contain the language meta tag you can add it to your routes and to your index.ejs:
 
-```
+```javascript
 app.get('/', function(req, res, next) {
     res.render('index.ejs', {
         lang: req.session.lang
@@ -53,7 +53,6 @@ app.get('/', function(req, res, next) {
 Changeing languges will be enabled by visiting the language code as uri
 ```
     https://example.com/en
-    https://example.com/de
     https://example.com/hu
 
 ```
@@ -66,14 +65,14 @@ I assume you have all your public-html files in the public folder of the project
 Once the thing is up and running, you can start to create your multilingual strings.
 Let's say have a bold html text in your main.html file:
 
-```
+```html
 <b>Something as a language test.</b>
 
 ```
 Now edit that line, and add the markup.
 
-```
-<b>##@en Something as a language test. ##@de Dies ist etwas für einen Sprachtest. ##@hu Valami teszt a nyelvek kipróbálására. ##</b>
+```html
+<b>##@en Something as a language test. ##@hu Valami teszt a nyelvek kipróbálására. ##</b>
 
 ```
 That's it. Save it, and restart your project.
@@ -89,7 +88,7 @@ You can do this in jour JS, JSON files, everywhere! (I suggest, to put the tags 
 
 ## How it works
 
-When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the '##' separator, and if the chunk starts with a '@' character, then it is assumed that it is some text subject to localisation.
+When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the ## separator, and if the chunk starts with a @ character, then it is assumed that it is some text subject to localisation.
 For the given language code, the text is kept, all others all dropped. Simple. Once these files are rendered, they are saved in a /tmp folder and if the file is requested an express route is choosing a language based on req.session.lang, and serves the translated file.
 
 ## Do I need to define my languages and my default language?
@@ -101,7 +100,7 @@ You should. Look at this to get the idea:
 language.list = ['en', 'hu'];
 language.default = 'en';
 
-// create settings and language as objects and set these variables with some custom
+// create settings and language as objects and set these variables with some custom values
 app.locals.settings.language.list
 app.locals.settings.language.default
 
