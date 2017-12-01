@@ -46,7 +46,7 @@ app.get('/', function(req, res, next) {
 
 ```
 
-Changeing languges will be enabled by visiting the language code as uri - this will set the session.lang variable, and redirect to the site root..
+Changing languges will be enabled by visiting the language code as uri - this will set the session.lang variable, and redirect to the site root..
 ```
     https://example.com/en
     https://example.com/hu
