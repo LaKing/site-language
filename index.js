@@ -99,14 +99,22 @@ module.exports = function(app) {
         if (req.session.lang) return req.session.lang;
         // now guess what language to use
         var lang = language.default;
-
-        // we need to convert our array to a list of arguments, hence the apply function here
-        if (language.list.length > 0) lang = req.acceptsLanguages.apply((null, language.list));
-
-        // if there is a user preferred language we accept, it is set
-        // otherwise its false. set the default language
-        if (lang === false) lang = language.default;
         if (req.session) req.session.lang = lang;
+
+        // compare accepted languages with the language list
+        console.log(req.acceptsLanguages());
+        var la = req.acceptsLanguages();
+        for (var i=0; i< la.length; i++) {
+            for (var j=0; j< language.list.length; j++) {
+                if (la[i] === language.list[j]) {
+                    // we found an accepted languade
+                    lang = la[i];
+                    if (req.session) req.session.lang = lang;
+                    return lang;
+                } 
+            } 
+        }
+        // no match, we stay at the default.
         return lang;
     };
 
