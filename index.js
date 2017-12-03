@@ -102,7 +102,6 @@ module.exports = function(app) {
         if (req.session) req.session.lang = lang;
 
         // compare accepted languages with the language list
-        console.log(req.acceptsLanguages());
         var la = req.acceptsLanguages();
         for (var i=0; i< la.length; i++) {
             for (var j=0; j< language.list.length; j++) {
