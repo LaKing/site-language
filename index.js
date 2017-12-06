@@ -14,8 +14,7 @@ const CHUNK_SEPERATOR = '##';
 const LANGUAGE_PREFIX = '@';
 
 // note, you need to load this module after the session is loaded in the app inicialization
-module.exports = function(app) {
-
+module.exports = function(app, dir) {
 
     var language = {};
 
@@ -23,7 +22,9 @@ module.exports = function(app) {
     //const read_dir = app.locals.__dirname + '/source';
     //const lang_dir = app.locals.__dirname + '/locale';
 
-    const read_dir = app.locals.__dirname + '/public';
+    if (!dir) dir = app.locals.__dirname + '/public';
+    const read_dir = dir;
+
     const lang_dir = '/tmp';
 
     // defaults, in case we dont have settings
@@ -34,7 +35,7 @@ module.exports = function(app) {
         if (!app.locals.settings.language) app.locals.settings.language = {};
 
         if (app.locals.settings.language.list) language.list = app.locals.settings.language.list;
-        if (app.locals.settings.language.default) language.list = app.locals.settings.language.default;
+        if (app.locals.settings.language.default) language.default = app.locals.settings.language.default;
 
         app.locals.settings.language.list = language.list;
         app.locals.settings.language.default = language.default;
@@ -103,17 +104,18 @@ module.exports = function(app) {
 
         // compare accepted languages with the language list
         var la = req.acceptsLanguages();
-        for (var i=0; i< la.length; i++) {
-            for (var j=0; j< language.list.length; j++) {
+        for (var i = 0; i < la.length; i++) {
+            for (var j = 0; j < language.list.length; j++) {
                 if (la[i] === language.list[j]) {
                     // we found an accepted languade
                     lang = la[i];
                     if (req.session) req.session.lang = lang;
                     return lang;
-                } 
-            } 
+                }
+            }
         }
         // no match, we stay at the default.
+        //console.log("language default", lang);
         return lang;
     };
 
@@ -139,7 +141,7 @@ module.exports = function(app) {
             // ok, content is ready to be written.
             fs.writeFile(lang_dir + '/' + lang + '.' + file, r, function(err) {
                 if (err) return console.log(err);
-                //console.log("render", lang + '.' + file, "complete");
+                console.log("render", lang + '.' + file, "complete");
             });
         });
     };
@@ -153,6 +155,7 @@ module.exports = function(app) {
     };
 
     // INIT EXPRESS LANGUAGES ==============================
+
     language.create_change_handlers();
     language.create_file_handlers();
 
@@ -164,4 +167,4 @@ module.exports = function(app) {
     });
 
     return language;
-};
+};;
