@@ -24,16 +24,17 @@ curl https://raw.githubusercontent.com/LaKing/site-language/master/index.js > ap
 
 ### Installing
 
-Once installed, tell your express app to use it.
+Once installed, tell your express app to use the public folder as source for localisations.
 
 ```javascript
-require('site-language')(app);
+require('site-language')(app, 'public');
 // or if you got the code in your app fodler
-require('./app/language.js')(app);
+require('./app/language.js')(app, 'public');
 ```
+Note that this command will make the files in that folder visible to the web - you don't need to use express.static on that folder.
 
-
-And eventually, in case you use ejs, and want your index.html to contain the language meta tag you can add it to your routes and to your index.ejs:
+The session will contain lang as variable.
+So eventually, in case you use ejs, and want your index.html to contain the language meta tag you can add it to your routes and to your index.ejs:
 
 ```javascript
 app.get('/', function(req, res, next) {
@@ -52,9 +53,6 @@ Changing languges will be enabled by visiting the language code as uri - this wi
     https://example.com/hu
 
 ```
-
-I assume you have all your public-html files in the public folder of the project. If not you may need to fine-tune the code.
-
 
 ## Usage
 
@@ -116,7 +114,7 @@ Feel free to open issues.
 
 ## Authors
 
-* **István Király** - *All work* - [LaKing](https://github.com/LaKing)
+* **István Király** - [LaKing](https://github.com/LaKing)
 
 ## License
 
