@@ -1,6 +1,6 @@
 {
   "name": "site-language",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Create multilingual sites in NodeJS with inline localisations. Edit",
   "main": "index.js",
   "scripts": {

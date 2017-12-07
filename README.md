@@ -123,4 +123,6 @@ This project is licensed under the ISC License
 ## Notice
 
 This module enables also special comments. These comments wont appear in the rendered files, thus won't be visible in browsers.
-Eg. ##@-- This is a comment, as it does not relate to any language ##
+```
+##@-- This is a comment, as it does not relate to any language ##
+```
