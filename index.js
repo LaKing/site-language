@@ -16,13 +16,10 @@ const LANGUAGE_PREFIX = '@';
 // note, you need to load this module after the session is loaded in the app inicialization
 module.exports = function(app, dir) {
 
+
     var language = {};
 
-    // for now we use these as constants
-    //const read_dir = app.locals.__dirname + '/source';
-    //const lang_dir = app.locals.__dirname + '/locale';
-
-    if (!dir) dir = app.locals.__dirname + '/public';
+    if (!dir) dir = process.cwd() + '/public';
     const read_dir = dir;
 
     const lang_dir = '/tmp';
@@ -141,7 +138,7 @@ module.exports = function(app, dir) {
             // ok, content is ready to be written.
             fs.writeFile(lang_dir + '/' + lang + '.' + file, r, function(err) {
                 if (err) return console.log(err);
-                console.log("render", lang + '.' + file, "complete");
+                //console.log("render", lang + '.' + file, "complete");
             });
         });
     };
@@ -167,4 +164,4 @@ module.exports = function(app, dir) {
     });
 
     return language;
-};;
+};
