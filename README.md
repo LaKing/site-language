@@ -67,7 +67,7 @@ Let's say have a bold HTML text in your main.html file:
 Now edit that line, and add the markup.
 
 ```html
-<b>##@en Something as a language test. ##@hu Valami teszt a nyelvek kipróbálására. ##</b>
+<b>##&en Something as a language test. ##&hu Valami teszt a nyelvek kipróbálására. ##</b>
 
 ```
 That's it. Save it, and restart your project.
@@ -81,7 +81,7 @@ app.locals.settings.debug = true
 ```
 ## How it works
 
-When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the ## separator, and if the chunk starts with a @ character, then it is assumed that it is some text subject to localisation.
+When the module is initialized, the public folder is scanned, and each file is processed, that means it will be split into chunks by the ## separator, and if the chunk starts with a & character, then it is assumed that it is some text subject to localisation.
 For the given language code, the text is kept, all others all dropped. Simple. Once these files are rendered, they are saved in a /tmp folder and if the file is requested an express route is choosing a language based on req.session.lang, and serves the translated file.
 
 ## Do I need to define my languages and my default language?
@@ -124,5 +124,5 @@ This project is licensed under the ISC License
 
 This module enables also special comments. These comments wont appear in the rendered files, thus won't be visible in browsers.
 ```
-##@-- This is a comment, as it does not relate to any language ##
+##&-- This is a comment, as it does not relate to any language ##
 ```

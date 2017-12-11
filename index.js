@@ -1,8 +1,8 @@
 /*jshint esnext: true */
 
 // This module provides inline defined site translations.
-// Usage: in your html/js/json files define your strings so that ## is a seperator and @en is a language selector.
-// Example: ##@en English text ##@de Deutscher text ##@hu Magyar szöveg ##
+// Usage: in your html/js/json files define your strings so that ## is a seperator and &en is a language selector.
+// Example: ##&en English text ##&de Deutscher text ##&hu Magyar szöveg ##
 // .. these will seperate english, german and hungarian versions of the file, only the relevant languages within the seperators will stay alive, the rest is dropped for a given language.
 // ISC license, LaKing@D250.hu, 2017.
 
@@ -11,7 +11,7 @@ const fs = require('fs');
 // should be two characters
 const CHUNK_SEPERATOR = '##';
 // shoule be one character
-const LANGUAGE_PREFIX = '@';
+const LANGUAGE_PREFIX = '&';
 
 // note, you need to load this module after the session is loaded in the app inicialization
 module.exports = function(app, dir) {
@@ -126,7 +126,7 @@ module.exports = function(app, dir) {
             var r = '';
             // iterate through the chunks
             for (var i = 0; i < ca.length; i++) {
-                // if this chunk starts with @ it is a language specific chunk
+                // if this chunk starts with & it is a language specific chunk
                 if (ca[i].charAt(0) === LANGUAGE_PREFIX) {
                     // check if need to keep it, other
                     if (ca[i].substring(0, LANGUAGE_PREFIX.length + lang.length + 1) === LANGUAGE_PREFIX + lang + ' ') r += ca[i].substring(LANGUAGE_PREFIX.length + lang.length + 1, ca[i].length - 1);
